@@ -1,28 +1,53 @@
 const Course = require('../models/courseModel')
 const Attendance = require('../models/attendanceModel')
-
 const getCourses = async (req, res) => {
     try {
         console.log("Fetching courses and attendance from database...");
         const courses = await Course.find({});
         const allAttendance = await Attendance.find({});
 
+        // Initialize variables to calculate total attendance percentage, labs missed, and classes missed
+        let totalPresentClasses = 0;
+        let totalClasses = 0;
+        let labsMissed = 0;
+        let classesMissed = 0;
+
         const coursesWithAttendance = courses.map(course => {
             const courseAttendanceRecords = allAttendance.filter(record => record.courseId === course.courseId);
-            const totalClasses = courseAttendanceRecords.length;
-            const presentClasses = courseAttendanceRecords.filter(record => record.present).length;
-            const attendancePercentage = totalClasses ? (presentClasses / totalClasses) * 100 : 0;
+            const courseTotalClasses = courseAttendanceRecords.length;
+            const coursePresentClasses = courseAttendanceRecords.filter(record => record.present).length;
+            const courseAttendancePercentage = courseTotalClasses ? (coursePresentClasses / courseTotalClasses) * 100 : 0;
+
+            // Accumulate totals for overall statistics
+            totalPresentClasses += coursePresentClasses;
+            totalClasses += courseTotalClasses;
+
+            // Calculate missed labs and classes
+            const missedClasses = courseAttendanceRecords.filter(record => !record.present);
+            if (course.islab) {
+                labsMissed += missedClasses.length;
+            } else {
+                classesMissed += missedClasses.length;
+            }
 
             return {
                 ...course._doc,
-                attendance: `${attendancePercentage.toFixed(2)}%`
+                attendance: `${courseAttendancePercentage.toFixed(2)}%`
             };
         });
 
-        console.log("Courses with attendance:", coursesWithAttendance);
-        
-        // Sending array directly in response
-        res.status(200).json(coursesWithAttendance);
+        const totalAttendancePercentage = totalClasses ? (totalPresentClasses / totalClasses) * 100 : 0;
+
+        const response = {
+            courses: coursesWithAttendance,
+            totalAttendancePercentage: `${totalAttendancePercentage.toFixed(2)}%`,
+            labsMissed,
+            classesMissed
+        };
+
+        console.log("Response:", response);
+
+        res.status(200).json(response);
     } catch (error) {
         console.error('Error fetching courses:', error.message);
         res.status(500).json({ error: error.message });

@@ -1,7 +1,5 @@
 function Course(courses) {
-    console.log("###")
-    console.log(courses)
-    console.log(courses.courses)
+    
     return (
         <div className="my-courses">
             {
@@ -21,6 +19,7 @@ function Course(courses) {
                         </div>
                     </div>
                 ))
+                    
             }
         </div>
     )

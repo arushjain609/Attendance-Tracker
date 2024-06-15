@@ -13,7 +13,7 @@ export const LandingPage = () => {
   return (
     <div className="landing-page">
       <div className="div">
-        <NavBar />
+       <NavBar />
         {overall.Attendance<75 && <SiteAlert />}
         <br />
         <p className="hello-arush-jain">

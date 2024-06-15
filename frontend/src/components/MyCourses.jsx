@@ -7,10 +7,11 @@ function MyCourses(){
     useEffect(() =>{
         const fetchCourses = async () => {
             try {
+
                 const response = await fetch('http://localhost:3000/')
                 const json = await response.json()
                 if (response.ok) {
-                    setCourses(json)
+                    setCourses(json.courses)
                 }
             } catch (error) {
                 console.log(error)
@@ -18,9 +19,8 @@ function MyCourses(){
         }
         fetchCourses()
     },[])
-    console.log("Courses:", typeof(courses));
-    console.log("Courses length:", courses.length);
-    console.log("First course:", courses[0]);
+
+    
 
     /** 
     const courses = [
