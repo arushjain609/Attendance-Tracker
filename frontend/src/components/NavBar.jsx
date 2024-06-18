@@ -16,17 +16,17 @@ function NavBar() {
             </header>
             <div className="tabs">
                 <div className="home-tab">
-                    <div className="section-wrapper">
-                        <div className="section"><Link className="section" auto spy to="#">Home</Link></div>
+                    <div className="home-wrapper">
+                        <div className="section"><Link className="section" auto spy to="top">Home</Link></div>
                     </div>
                 </div>
                 <div className="courses-tab">
-                    <div className="link-wrapper">
+                    <div className="courses-wrapper">
                         <div className="link"><Link auto spy to="my_courses">Courses</Link></div>
                     </div>
                 </div>
                 <div className="new_course-tab">
-                    <div className="link-wrapper">
+                    <div className="newcourses-wrapper">
                         <div className="link"><Link auto spy to="new_course">New Course</Link></div>
                     </div>
                 </div>

@@ -20,8 +20,9 @@ export const LandingPage = () => {
           <span className="text-wrapper">Welcome!</span>
         </p>
         <OverallStats OverallStats={overall}/>
-        <MyCourses />
+        <div className="MyCourses"><MyCourses /></div>
         <NewCourse />
+        {/* <br/> */}
         {/* <Announcements /> */}
         <Footer />
       </div>

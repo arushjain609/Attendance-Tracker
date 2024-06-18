@@ -1,10 +1,12 @@
 import { LandingPage } from "./pages/LandingPage"
+import CoursePage from "./pages/CoursePage";
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 function App() {
   return(
     <div className="App">
-      <BrowserRouter>
+      <CoursePage/>
+      {/* <BrowserRouter>
         <div className="pages">
           <Routes>
             <Route 
@@ -13,7 +15,7 @@ function App() {
             />
           </Routes>
         </div>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </div>
   );
   

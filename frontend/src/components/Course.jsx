@@ -19,7 +19,6 @@ function Course(courses) {
                         </div>
                     </div>
                 ))
-                    
             }
         </div>
     )
