@@ -149,6 +149,16 @@ html {
     width: 100px;
   }
 
+  .course-page .coursepage-new-course{
+    text-decoration: none;
+    color: black;
+  }
+
+  .course-page .coursepage-course{
+    text-decoration: none;
+    color: white;
+  }
+
   /* .course-page .courses-tab:hover {
     background-color: #154488;
     border: 4px solid;
@@ -444,6 +454,7 @@ html {
     background-color: #00000036;
     border-radius: 67.58px/67.75px;
     height: 136px;
+    align-items: center;
     position: relative;
     width: 135px;
     top: auto;
@@ -472,6 +483,23 @@ html {
     text-align: center;
     top: 55px;
     width: 53px;
+  }
+
+  .course-page .course-stats .text-wrapper-4-attendance {
+    color: #000000;
+    font-family: "Quando-Regular", Helvetica;
+    font-size: 18px;
+    font-weight: 400;
+    height: fit-content;
+    /* left: 39px; */
+    /* margin-left: -10px; */
+    letter-spacing: 0;
+    line-height: 27px;
+    position: relative;
+    text-align: center;
+    top: 55px;
+    margin: auto;
+    width: fit-content;
   }
   
   .course-page .course-stats .overlap-group-wrapper {
