@@ -72,7 +72,7 @@ export const CourseStats = () => {
             <div className="pie-chart">
                 <div className="overlap-group-2">
                     <div className="ellipse" />
-                    <div className="text-wrapper-4">{percentage}%</div>
+                    <div className="text-wrapper-4-attendance">{percentage}%</div>
                 </div>
             </div>
             </div>
