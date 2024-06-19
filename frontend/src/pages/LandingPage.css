@@ -97,7 +97,7 @@ html {
   .landing-page .tabs{
     position: relative;
     right: 0%;
-    left: 300%;
+    left: 310%;
     /* float: right; */
   }
   
@@ -422,6 +422,22 @@ html {
     top: 55px;
     width: 53px;
   }
+
+  .landing-page .text-wrapper-4-attendance {
+    color: #000000;
+    font-family: "Quando-Regular", Helvetica;
+    font-size: 18px;
+    font-weight: 400;
+    height: fit-content;
+    /* left: 31px; */
+    letter-spacing: 0;
+    line-height: 27px;
+    position: relative;
+    text-align: center;
+    top: 55px;
+    margin: auto;
+    width: fit-content;
+  }
   
   .landing-page .engineering {
     -webkit-box-orient: vertical;
@@ -624,7 +640,8 @@ html {
   }
   
   .landing-page .course-card {
-    background-color: #a4d0fc;
+    /* background-color: #a4d0fc; */
+    background-color: #fb02e214; 
     border-radius: 8px;
     height: 189px;
     /* left: auto; */
