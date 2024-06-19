@@ -36,7 +36,7 @@ function NavBar() {
                             {isHomePage ? (
                                 <ScrollLink auto spy to="my_courses">Courses</ScrollLink>
                             ) : (
-                                <RouterLink to="/">Courses</RouterLink>
+                                <RouterLink to="/" className="coursepage-course">Courses</RouterLink>
                             )}
                         </div>
                     </div>  
@@ -47,7 +47,7 @@ function NavBar() {
                             {isHomePage ? (
                                 <ScrollLink auto spy to="new_course">New Course</ScrollLink>
                             ) : (
-                                <RouterLink to="/">New Course</RouterLink>
+                                <RouterLink to="/" className="coursepage-new-course">New Course</RouterLink>
                             )}
                         </div>
                     </div>
