@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import "./CoursePage.css";
 
 function CoursePage() {
+    
     return(
         <div className="course-page">
             <div className="div">

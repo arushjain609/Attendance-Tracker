@@ -7,15 +7,15 @@ router.get('/favicon.ico', (req, res) => res.send(''));
 
 router.get('/', getCourses)
 
-router.get('/:id', getCourse)
+router.get('/course/:id', getCourse)
 
 router.post('/', createCourse)
 
-router.post('/:id', addAttendance)
+router.post('/course/:id', addAttendance)
 
-router.patch('/:id', updateAttendance)
+router.patch('/course/:id', updateAttendance)
 
-router.delete('/:id', deleteCourse)
+router.delete('/course/:id', deleteCourse)
 
 
 

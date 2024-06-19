@@ -5,17 +5,20 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 function App() {
   return(
     <div className="App">
-      <CoursePage/>
-      {/* <BrowserRouter>
+       <BrowserRouter>
         <div className="pages">
           <Routes>
             <Route 
             path="/" 
             element={<LandingPage/>}
             />
+            <Route 
+            path="/course/:id"
+            element={<CoursePage/>}
+              />
           </Routes>
         </div>
-      </BrowserRouter> */}
+      </BrowserRouter> 
     </div>
   );
   

@@ -1,31 +1,75 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { useParams } from "react-router-dom";
 
 function UpdateAttendance(){
-    const [startDate, setStartDate] = useState(new Date());
+    const [date, setDate] = useState(new Date());
+    const {id} = useParams();
+    const [present, setPresent] = useState(false);
+
+    const handlePresentChange = (event) => {
+        setPresent(event.target.value);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const formData = {
+            date: date.toISOString().split('T')[0],
+            present
+        };
+        console.log(formData)
+        
+        try {   
+            const response = await fetch(`http://localhost:3000/course/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to attendance');
+            }
+
+            setDate(null);
+            setPresent(null);
+
+            alert('Attendance updated successfully!');
+        } catch (error) {
+            console.error('Error updating attendance:', error.message);
+            alert('Failed to add attendance. Please try again.');
+        }
+        
+    };
+
+
+
+
     return(
         <div className="AddAttendance">
-            <form className="add-attendance">
+            <form className="add-attendance" onSubmit={handleSubmit}>
                 <div className="input">
                     <div className="date-option">
                         <label htmlFor="date">Date</label><br />
                         <DatePicker
                             showIcon
-                            selected={startDate}
+                            selected={date}
                             onChange={(date) => {
-                                setStartDate(date);
-                                console.log(startDate);
+                                setDate(date);
+                                console.log(date);
                             }}
                         />
                         <br/>
                     </div>
                     <div className="attendance-option">
                         <label htmlFor="attendance">Attendance</label><br />
-                        <select id="attendance" name="attendance" className="attendance">
-                            <option value="none">None</option>
-                            <option value="present">Present</option>
-                            <option value="absent">Absent</option>
+                        <select id="attendance" name="attendance" className="attendance" onChange={handlePresentChange}>
+                            <option value={null}>None</option>
+                            <option value="true">Present</option>
+                            <option value="false">Absent</option>
                         </select>
                     </div>
                 </div>

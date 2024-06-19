@@ -59,11 +59,23 @@ const getCourses = async (req, res) => {
 const getCourse = async (req, res) => {
     const {id} = req.params
     const course = await Course.findById(id)
-    const attendance = await Attendance.findById(id)
+    const attendanceAll = await Attendance.find({courseId:course.courseId})
+    const classesAttended = attendanceAll.filter(record => record.present).length;
+    const classesMissed = attendanceAll.length-classesAttended;
+    const percentage = ((classesAttended+classesMissed) ? (classesAttended / (classesAttended+classesMissed)) *100 : 0).toFixed(2);
+    const reqClasses = Math.max(0,3*classesMissed-classesAttended);
+    const eventList = attendanceAll.map(record => ({
+        title: record.present ? "present" : "absent",
+        start: record.date,
+        end: record.date,
+        allDay: true,
+        resource: record.present
+    }));
+
     if (!course) {
         return res.status(404).json({error: 'No such course'})
     }
-    res.status(200).json({course, attendance})
+    res.status(200).json({course, attendanceAll, stats:{percentage, classesMissed, classesAttended, reqClasses},eventList})
 }
 
 const createCourse = async (req, res) => {
@@ -112,6 +124,8 @@ const addAttendance = async (req, res) => {
     const { id } = req.params;
     const course = await Course.findById(id);
     const { date, present} = req.body;
+    console.log(date);
+    console.log(present);
     try{
         const attendance = await Attendance.create({courseId: course.courseId, date, present})
         res.status(200).json(attendance)

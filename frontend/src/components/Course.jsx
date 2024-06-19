@@ -1,9 +1,11 @@
+import {Link } from 'react-router-dom';
 function Course(courses) {
     
     return (
         <div className="my-courses">
             {
                 courses.courses.map((course) => (
+                    <Link to={`/course/${course._id}`}>
                     <div className="course-card">
                         <div className="overlap-7">
                         <div className="overlap-8">
@@ -18,6 +20,7 @@ function Course(courses) {
                         <div className="text-wrapper-8">{course.courseName}</div>
                         </div>
                     </div>
+                    </Link>
                 ))
             }
         </div>
