@@ -8,7 +8,9 @@ import Footer from "../components/Footer";
 import "./LandingPage.css";
 import { useEffect,useState } from "react";
 
+
 export const LandingPage = () => {
+  
   const [overall, setOverall] = useState(0)
 
   function makeInt(percentageString) {

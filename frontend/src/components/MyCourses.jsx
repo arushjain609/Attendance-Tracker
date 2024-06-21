@@ -1,7 +1,10 @@
 import Course from "./Course"
 import { useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function MyCourses(){
+    const navigateTo = useNavigate()
     const [courses, setCourses] = useState([])
 
     useEffect(() =>{
@@ -12,6 +15,7 @@ function MyCourses(){
                 const json = await response.json()
                 if (response.ok) {
                     setCourses(json.courses)
+
                 }
             } catch (error) {
                 console.log(error)

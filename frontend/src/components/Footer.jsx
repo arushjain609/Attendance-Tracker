@@ -22,7 +22,7 @@ function Footer(){
                 <a href="#">Return to Top</a>
             </div>
           </div>
-          <div className="primary-links">
+         {/**  <div className="primary-links">
             <div className="footer-primary-link">
               <div className="text-wrapper-18">Documentation</div>
             </div>
@@ -36,6 +36,7 @@ function Footer(){
               <div className="text-wrapper-18">About us</div>
             </div>
           </div>
+          */}
           <div className="agency-wrapper">
             <div className="agency">
               <div className="name-of-agency">Attendance Tracker</div>

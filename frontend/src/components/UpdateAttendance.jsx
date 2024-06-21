@@ -14,14 +14,14 @@ function UpdateAttendance(){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         const formData = {
             date: date.toISOString().split('T')[0],
             present
         };
-        console.log(formData)
+        console.log(formData);
         
-        try {   
+        try {
             const response = await fetch(`http://localhost:3000/course/${id}`, {
                 method: 'PATCH',
                 headers: {
@@ -29,22 +29,23 @@ function UpdateAttendance(){
                 },
                 body: JSON.stringify(formData)
             });
-
+    
             if (!response.ok) {
-                throw new Error('Failed to attendance');
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to update attendance');
             }
-
+    
             setDate(null);
             setPresent(null);
-
+    
             alert('Attendance updated successfully!');
+            window.location.reload();
         } catch (error) {
             console.error('Error updating attendance:', error.message);
-            alert('Failed to add attendance. Please try again.');
+            alert(error.message || 'Failed to update attendance. Please try again.');
         }
-        
     };
-
+    
 
 
 

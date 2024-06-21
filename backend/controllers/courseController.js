@@ -87,6 +87,10 @@ const createCourse = async (req, res) => {
             throw new Error('Invalid data format');
         }
 
+        if (Course.find({courseId:courseId})) {
+            throw new Error('Course with same ID already exists');
+        }
+
         // Create new course document
         const newCourse = new Course({
             courseId,
@@ -123,34 +127,48 @@ const deleteCourse = async (req, res) => {
 const addAttendance = async (req, res) => {
     const { id } = req.params;
     const course = await Course.findById(id);
-    const { date, present} = req.body;
-    console.log(date);
-    console.log(present);
-    try{
-        const attendance = await Attendance.create({courseId: course.courseId, date, present})
-        res.status(200).json(attendance)
+    const { date, present } = req.body;
+
+    try {
+        const existingAttendance = await Attendance.findOne({ courseId: course.courseId, date });
+
+        if (existingAttendance) {
+            return res.status(400).json({ error: "Attendance for this date already exists." });
+        }
+
+        const attendance = await Attendance.create({ courseId: course.courseId, date, present });
+        res.status(200).json(attendance);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
-    catch (error) {
-        res.status(400).json({error: error.message})
-    }
-}
+};
+
 
 const updateAttendance = async (req, res) => {
     const { id } = req.params;
     const course = await Course.findById(id);
-    const { date, present} = req.body;
-    try {    
-        const attendance = await Attendance.findOneAndUpdate({courseId: course.courseId, date: date},{
-            present: present
-        })
-        res.status(200).json(attendance)
-    }
-    catch (error) {
-        res.status(400).json({error: error.message})
-    }
+    const { date, present } = req.body;
 
+    try {
+        const existingAttendance = await Attendance.findOne({ courseId: course.courseId, date });
 
-}
+        if (!existingAttendance) {
+            return res.status(400).json({ error: "No attendance record found for this date." });
+        }
+
+        // Update the existing attendance record
+        const attendance = await Attendance.findOneAndUpdate(
+            { courseId: course.courseId, date },
+            { present },
+            { new: true } 
+        );
+
+        res.status(200).json(attendance);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 
 module.exports = {
     createCourse,

@@ -39,11 +39,11 @@ function NewCourse() {
             setCourseName('');
             setSemester('');
             setIsLab(false); 
-
+            window.location.reload();
             alert('Course added successfully!');
         } catch (error) {
             console.error('Error adding course:', error.message);
-            alert('Failed to add course. Please try again.');
+            alert(error.message);
         }
         
     };

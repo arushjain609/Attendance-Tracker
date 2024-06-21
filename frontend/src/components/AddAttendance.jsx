@@ -15,14 +15,14 @@ function AddAttendance(){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         const formData = {
             date: date.toISOString().split('T')[0],
             present
         };
-        console.log(formData)
+        console.log(formData);
         
-        try {   
+        try {
             const response = await fetch(`http://localhost:3000/course/${id}`, {
                 method: 'POST',
                 headers: {
@@ -30,23 +30,23 @@ function AddAttendance(){
                 },
                 body: JSON.stringify(formData)
             });
-
+    
             if (!response.ok) {
-                throw new Error('Failed to attendance');
+                const errorData = await response.json();
+                throw new Error(errorData.error);
             }
-
+    
             setDate(null);
             setPresent(null);
-
+    
             alert('Attendance added successfully!');
+            window.location.reload();
         } catch (error) {
             console.error('Error adding attendance:', error.message);
-            alert('Failed to add attendance. Please try again.');
+            alert(error.message);
         }
-        
     };
-
-
+    
 
     return(
         <div className="AddAttendance">
