@@ -87,8 +87,9 @@ const createCourse = async (req, res) => {
             throw new Error('Invalid data format');
         }
 
-        if (Course.find({courseId:courseId})) {
-            throw new Error('Course with same ID already exists');
+        const existingCourse = await Course.findOne({ courseId });
+        if (existingCourse) {
+            throw new Error('Course with the same ID already exists');
         }
 
         // Create new course document
