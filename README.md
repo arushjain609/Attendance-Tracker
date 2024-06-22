@@ -1,3 +1,12 @@
+# Attendance Management App
+
+A web application that helps users in tracking and managing their attendance built using MERN stack.
+
+## Features
+- Add or remove courses
+- Add or update attendance for a particular course
+- Track the attendance percentage, classes and labs missed
+- Get alerts if attendance falls below a threshold
 
 ## Installation
 
